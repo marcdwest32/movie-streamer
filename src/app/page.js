@@ -1,5 +1,6 @@
 import Navbar from './components/nav/navbar'
 import Banner from './components/banner/banner'
+import Card from './components/card/card'
 
 export default function Home() {
   return (
@@ -10,7 +11,9 @@ export default function Home() {
         subTitle='big red dog'
         imgUrl='/static/clifford.webp'
       />
-      {/* <Card/> */}
+      <Card imgUrl='/static/clifford.webp' size='large' />
+      <Card size='medium' />
+      <Card imgUrl='/static/clifford.webp' size='small' />
     </main>
   )
 }
