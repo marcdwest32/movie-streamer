@@ -7,9 +7,7 @@ import styles from './card.module.css'
 const defaultImg =
   'https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
 
-const Card = (props) => {
-  const { imgUrl = defaultImg, size = 'medium', id } = props
-
+const Card = ({ imgUrl = defaultImg, size = 'medium', id }) => {
   const [imgSrc, setImgSrc] = useState(imgUrl)
   const classMap = {
     large: styles.lgItem,
