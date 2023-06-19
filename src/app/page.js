@@ -1,6 +1,7 @@
 import Navbar from './components/nav/navbar'
 import Banner from './components/banner/banner'
-import Card from './components/card/card'
+import CardSection from './components/cardSection/cardSection'
+import styles from './page.module.css'
 
 export default function Home() {
   return (
@@ -11,9 +12,9 @@ export default function Home() {
         subTitle='big red dog'
         imgUrl='/static/clifford.webp'
       />
-      <Card imgUrl='/static/clifford.webp' size='large' />
-      <Card size='medium' />
-      <Card imgUrl='/static/clifford.webp' size='small' />
+      <div className={styles.sectionWrapper}>
+        <CardSection title='Disney' />
+      </div>
     </main>
   )
 }

@@ -1,0 +1,69 @@
+.container {
+  color: var(--blue20);
+  background-color: --var(--black50);
+  position: relative;
+  padding: 2rem 1rem;
+}
+
+.cardWrapper {
+  position: relative;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  margin-top: 1.5rem;
+  margin-right: 0.75rem;
+  padding-top: 1.7rem;
+  padding-bottom: 1.5rem;
+}
+
+.leftArrow {
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 1rem;
+  top: 0;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.rightArrow {
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 1rem;
+  top: 0;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.title {
+  color: var(--white10);
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.mb3 {
+  margin-bottom: 3rem /* 48px */;
+}
+
+.mb2 {
+  margin-bottom: 2rem /* 32px */;
+}
+
+.cardImg:hover {
+  z-index: 50;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 4rem /* 64px */;
+    padding-right: 4rem /* 64px */;
+  }
+}
