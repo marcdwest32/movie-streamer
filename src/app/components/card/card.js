@@ -33,6 +33,7 @@ const Card = ({ imgUrl = defaultImg, size = 'medium', id }) => {
           src={imgSrc}
           alt='image'
           fill
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           onError={handleOnError}
         />
       </motion.div>
