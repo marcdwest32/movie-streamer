@@ -1,17 +1,33 @@
-const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY
+export const getCommonVideos = async (url) => {
+  const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY
+  const baseUrl = 'https://youtube.googleapis.com/youtube/v3/'
 
-export const getVideos = async () => {
-  const response = await fetch(
-    `https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&q=marvel%20comics&key=${YOUTUBE_API_KEY}`,
-  )
+  const response = await fetch(`${baseUrl}${url}&key=${YOUTUBE_API_KEY}`)
 
   const data = await response.json()
 
+  if (data?.error) {
+    console.error('Something went wrong with the video library', data.error)
+    return []
+  }
+
   return data.items.map((item) => {
+    // console.log(item)
+    const id = item.id?.videoId || item.id
     return {
       title: item.snippet.title,
       imgUrl: item.snippet.thumbnails.high.url,
-      id: item?.id?.videoId,
+      id,
     }
   })
+}
+
+export const getPopularVideos = async () => {
+  const url = `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=25&regionCode=US`
+  return getCommonVideos(url)
+}
+
+export const getVideos = (searchQuery) => {
+  const url = `search?part=snippet&type=video&maxResults=25&q=${searchQuery}`
+  return getCommonVideos(url)
 }
