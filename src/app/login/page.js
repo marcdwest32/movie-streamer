@@ -2,13 +2,34 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from './login.module.css'
-
-const handleLoginWithEmail = (e) => {
-  e.preventDefault()
-  console.log('Login button')
-}
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
+  const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [userMsg, setUserMsg] = useState('')
+
+  const handleOnChangeEmail = (e) => {
+    setUserMsg('')
+    const emailInput = e.target.value
+    setEmail(emailInput)
+  }
+  const handleLoginWithEmail = (e) => {
+    e.preventDefault()
+    console.log('Login button')
+    if (email) {
+      if (email === 'marc@gmail.com') {
+        console.log('route to dashboard')
+        router.push('/')
+      } else {
+        setUserMsg('There was a problem logging in')
+      }
+    } else {
+      setUserMsg('Please enter a valid email address')
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -34,14 +55,17 @@ const Login = () => {
         <div className={styles.mainWrapper}>
           <h1 className={styles.signinHeader}>Sign In</h1>
           <input
-            type='text'
+            type='email'
             name='signin'
             placeholder='Email Address'
             id=''
             className={styles.emailInput}
+            onChange={handleOnChangeEmail}
           />
-          <p className={styles.userMsg}></p>
-          <button onClick={handleLoginWithEmail}>Sign In</button>
+          <p className={styles.userMsg}>{userMsg}</p>
+          <button className={styles.loginBtn} onClick={handleLoginWithEmail}>
+            Sign In
+          </button>
         </div>
       </main>
     </div>
