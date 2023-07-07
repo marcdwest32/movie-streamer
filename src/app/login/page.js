@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from './login.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { signIn, signOut } from 'next-auth/react'
 
 const Login = () => {
   const router = useRouter()
@@ -18,16 +19,17 @@ const Login = () => {
   const handleLoginWithEmail = (e) => {
     e.preventDefault()
     console.log('Login button')
-    if (email) {
-      if (email === 'marc@gmail.com') {
-        console.log('route to dashboard')
-        router.push('/')
-      } else {
-        setUserMsg('There was a problem logging in')
-      }
-    } else {
-      setUserMsg('Please enter a valid email address')
-    }
+    signIn()
+    // if (email) {
+    //   if (email === 'marc@gmail.com') {
+    //     console.log('route to dashboard')
+    //     router.push('/')
+    //   } else {
+    //     setUserMsg('There was a problem logging in')
+    //   }
+    // } else {
+    //   setUserMsg('Please enter a valid email address')
+    // }
   }
 
   return (

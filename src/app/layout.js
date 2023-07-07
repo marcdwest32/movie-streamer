@@ -1,5 +1,6 @@
 import './globals.css'
 import { Roboto_Slab } from 'next/font/google'
+import NextAuthProvider from './providers'
 
 const robotoSlab = Roboto_Slab({
   weight: '700',
@@ -16,7 +17,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className={robotoSlab.className}>{children}</body>
+      <body className={robotoSlab.className}>
+        <NextAuthProvider>{children}</NextAuthProvider>
+      </body>
     </html>
   )
 }

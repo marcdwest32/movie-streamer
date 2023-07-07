@@ -3,9 +3,12 @@ import styles from './navbar.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 
-const Navbar = (props) => {
-  const { username } = props
+const Navbar = () => {
+  const { data: session } = useSession()
+  console.log(JSON.stringify(session.user))
+  const username = session.user.name
 
   const [dropdown, showDropdown] = useState(false)
   const handleShowDropdown = (e) => {
