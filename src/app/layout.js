@@ -17,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className={robotoSlab.className}>
+      <body id='__next' className={robotoSlab.className}>
         <NextAuthProvider>{children}</NextAuthProvider>
       </body>
     </html>
