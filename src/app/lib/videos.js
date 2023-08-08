@@ -40,7 +40,8 @@ export const getVideos = (category) => {
     return {
       title: item.snippet.title,
       imgUrl: item.snippet.thumbnails.high.url,
-      id: item?.id?.videoId,
+      videoId: item?.id?.videoId,
+      channelId: item?.id?.channelId,
     }
   })
 }
