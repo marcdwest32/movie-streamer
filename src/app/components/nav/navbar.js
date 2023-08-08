@@ -4,16 +4,32 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
+import { signIn, signOut } from 'next-auth/react'
 
 const Navbar = () => {
+  //   const [username, setUsername] = useState('')
+  let username = null
   const { data: session } = useSession()
-  console.log(JSON.stringify(session.user))
-  const username = session.user.name
+  if (session) {
+    // console.log(JSON.stringify(session.user))
+    // setUsername(session.user.name)
+    username = session.user.name
+  }
 
   const [dropdown, showDropdown] = useState(false)
   const handleShowDropdown = (e) => {
     e.preventDefault()
     showDropdown(!dropdown)
+  }
+
+  const handleLogout = (e) => {
+    e.preventDefault()
+    signOut()
+  }
+
+  const handleLoginWithEmail = (e) => {
+    e.preventDefault()
+    signIn()
   }
 
   return (
@@ -37,6 +53,7 @@ const Navbar = () => {
             <li className={styles.navItem2}>List</li>
           </Link>
         </ul>
+
         <nav className={styles.navContainer}>
           <div>
             <button className={styles.usernameBtn} onClick={handleShowDropdown}>
@@ -51,9 +68,18 @@ const Navbar = () => {
             {dropdown && (
               <div className={styles.navDropdown}>
                 <div>
-                  <Link href={'/login'} className={styles.linkName}>
-                    Sign Out
-                  </Link>
+                  {username ? (
+                    <button className={styles.linkName} onClick={handleLogout}>
+                      Sign Out
+                    </button>
+                  ) : (
+                    <button
+                      className={styles.linkName}
+                      onClick={handleLoginWithEmail}
+                    >
+                      Sign In
+                    </button>
+                  )}
                   <div className={styles.lineWrapper}></div>
                 </div>
               </div>

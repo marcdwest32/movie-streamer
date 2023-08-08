@@ -5,6 +5,8 @@ import Banner from './components/banner/banner'
 import CardSection from './components/cardSection/cardSection'
 import styles from './page.module.css'
 import { getVideos, getPopularVideos } from './lib/videos'
+import { useSession } from 'next-auth/react'
+// import { useRouter } from 'next/navigation'
 
 const defaultImg =
   'https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
@@ -38,17 +40,19 @@ async function getData() {
 }
 
 export default function Home() {
-  //   const [didToken, setDidToken] = useState(null)
-  //   const videos = (await getData()) || []
-  //   const { kurzgesagtVideos, marvelVideos, nflVideos, spaceVideos } =
-  //     videos.results
+  //   const router = useRouter()
 
+  const { data: session } = useSession()
+  let authenticated = false
+  if (session) {
+    authenticated = true
+  }
   //   useEffect(() => {
-  //     // Check if the didToken exists and set it in the context
-  //     if (didToken) {
-  //       setDidToken(didToken)
+  //     if (authenticated === false) {
+  //       router.push('/')
   //     }
-  //   }, [didToken])
+  //   }, [])
+
   const [videos, setVideos] = useState(null)
 
   useEffect(() => {
@@ -68,9 +72,15 @@ export default function Home() {
   const { kurzgesagtVideos, marvelVideos, nflVideos, spaceVideos } = videos
 
   return (
-      <main className={styles.main}>
-        <Navbar username='Marc@gmail.com' />
-        <Banner title='MeTube' subTitle='projector' imgUrl={defaultImg} />
+    <main className={styles.main}>
+      <Navbar />
+      <Banner
+        title='MeTube'
+        subTitle='projector'
+        imgUrl={defaultImg}
+        videoId='V4Z8EdiJxgk'
+      />
+      {authenticated && (
         <div className={styles.sectionWrapper}>
           <CardSection title='Marvel' videos={marvelVideos} size='large' />
           <CardSection
@@ -81,6 +91,7 @@ export default function Home() {
           <CardSection title='NFL' videos={nflVideos} size='small' />
           <CardSection title='Popular' videos={spaceVideos} size='medium' />
         </div>
-      </main>
+      )}
+    </main>
   )
 }
