@@ -36,11 +36,10 @@ const CardSection = ({ size, title, videos }) => {
       </div>
       <div className={styles.cardWrapper} ref={cardWrapperRef}>
         {videos.map((video, i) => {
-          console.log(video)
+          //   console.log(video)
           const { videoId, channelId } = video
           return (
             <Link href={`/video/${videoId || channelId}`} key={i}>
-              Dashboard
               <Card imgUrl={video.imgUrl} size={size} id={i} key={i} />
             </Link>
           )
