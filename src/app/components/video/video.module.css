@@ -39,6 +39,7 @@
 /** Makes video edges curvy **/
 .videoPlayer {
   border-radius: 10px 10px 0px 0px;
+  border-width: 0px;
   composes: borderBoxShadow;
 }
 
