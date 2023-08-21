@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import cls from 'classnames'
 import styles from './video.module.css'
 import { useRouter } from 'next/navigation'
+import Navbar from '../nav/navbar'
 
 Modal.setAppElement('#__next')
 
@@ -13,12 +14,18 @@ const Video = ({ videoId, videoData }) => {
     return <div>Loading...</div>
   }
 
-  const { title, publishTime, description, channelTitle, viewCount } =
-    videoData.video
+  const {
+    title,
+    publishTime,
+    description,
+    channelTitle,
+    viewCount = 0,
+  } = videoData.video
 
   return (
     <div className={styles.container}>
-      video page {videoId}
+      {/* video page {videoId} */}
+      <Navbar />
       <Modal
         isOpen={true}
         contentLabel='Watch Video'
