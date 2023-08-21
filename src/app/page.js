@@ -4,9 +4,8 @@ import Navbar from './components/nav/navbar'
 import Banner from './components/banner/banner'
 import CardSection from './components/cardSection/cardSection'
 import styles from './page.module.css'
-import { getVideos, getPopularVideos } from './lib/videos'
+import { getVideos, getTestVideos, getPopularVideos } from './lib/videos'
 import { useSession } from 'next-auth/react'
-// import { useRouter } from 'next/navigation'
 
 const defaultImg =
   'https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
@@ -25,10 +24,10 @@ const defaultImg =
 
 // Testing
 async function getData() {
-  const kurzgesagtVideos = getVideos('kurzgesagt')
-  const marvelVideos = getVideos('marvel')
-  const nflVideos = getVideos('nfl')
-  const spaceVideos = getVideos('space')
+  const kurzgesagtVideos = getTestVideos('kurzgesagt')
+  const marvelVideos = getTestVideos('marvel')
+  const nflVideos = getTestVideos('nfl')
+  const spaceVideos = getTestVideos('space')
   return {
     results: {
       kurzgesagtVideos,
@@ -40,18 +39,11 @@ async function getData() {
 }
 
 export default function Home() {
-  //   const router = useRouter()
-
   const { data: session } = useSession()
   let authenticated = false
   if (session) {
     authenticated = true
   }
-  //   useEffect(() => {
-  //     if (authenticated === false) {
-  //       router.push('/')
-  //     }
-  //   }, [])
 
   const [videos, setVideos] = useState(null)
 
@@ -69,7 +61,13 @@ export default function Home() {
     return <div>Loading...</div>
   }
 
-  const { kurzgesagtVideos, marvelVideos, nflVideos, spaceVideos } = videos
+  const {
+    kurzgesagtVideos,
+    marvelVideos,
+    nflVideos,
+    popularVideos,
+    spaceVideos,
+  } = videos
 
   return (
     <main className={styles.main}>
@@ -82,14 +80,20 @@ export default function Home() {
       />
       {authenticated && (
         <div className={styles.sectionWrapper}>
-          <CardSection title='Marvel' videos={marvelVideos} size='large' />
+          <CardSection
+            title='Marvel'
+            videos={marvelVideos}
+            // paths={paths}
+            size='large'
+          />
           <CardSection
             title='Kurzgesagt'
             videos={kurzgesagtVideos}
             size='small'
           />
           <CardSection title='NFL' videos={nflVideos} size='small' />
-          <CardSection title='Popular' videos={spaceVideos} size='medium' />
+          <CardSection title='Space' videos={spaceVideos} size='medium' />
+          {/* <CardSection title='Popular' videos={popularVideos} size='medium' /> */}
         </div>
       )}
     </main>

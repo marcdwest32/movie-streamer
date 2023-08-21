@@ -273,34 +273,6 @@
       },
       {
         "kind": "youtube#searchResult",
-        "etag": "rkDIqMCieTVL-hDqhp56mGqvmBI",
-        "id": {
-          "kind": "youtube#channel",
-          "channelId": "UCKxQmKgrkUv4S7P5w0pLayw"
-        },
-        "snippet": {
-          "publishedAt": "2013-07-09T04:12:34Z",
-          "channelId": "UCKxQmKgrkUv4S7P5w0pLayw",
-          "title": "Comics Explained",
-          "description": "What's up? I'm Rob aka Comics Explained and I've been reading comic books for over 25 years. So whether you're looking to get ...",
-          "thumbnails": {
-            "default": {
-              "url": "https://yt3.ggpht.com/BtacbXCx69dd4l6YHartyWrbR4lWIEB39j_9xfx0_FpOdLEQAwUtWmKFXsRVUMvxjodLYfnYNFY=s88-c-k-c0xffffffff-no-rj-mo"
-            },
-            "medium": {
-              "url": "https://yt3.ggpht.com/BtacbXCx69dd4l6YHartyWrbR4lWIEB39j_9xfx0_FpOdLEQAwUtWmKFXsRVUMvxjodLYfnYNFY=s240-c-k-c0xffffffff-no-rj-mo"
-            },
-            "high": {
-              "url": "https://yt3.ggpht.com/BtacbXCx69dd4l6YHartyWrbR4lWIEB39j_9xfx0_FpOdLEQAwUtWmKFXsRVUMvxjodLYfnYNFY=s800-c-k-c0xffffffff-no-rj-mo"
-            }
-          },
-          "channelTitle": "Comics Explained",
-          "liveBroadcastContent": "none",
-          "publishTime": "2013-07-09T04:12:34Z"
-        }
-      },
-      {
-        "kind": "youtube#searchResult",
         "etag": "jM_m4M5rP-IFa6hrhxiPMZSv7B8",
         "id": {
           "kind": "youtube#video",
