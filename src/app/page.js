@@ -6,34 +6,39 @@ import CardSection from './components/cardSection/cardSection'
 import styles from './page.module.css'
 import { getVideos, getTestVideos, getPopularVideos } from './lib/videos'
 import { useSession } from 'next-auth/react'
+const isDev = process.env.DEVELOPMENT
 
 const defaultImg =
   'https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
 
-// production
 // This gets called on every request
-// async function getData() {
-//   const kurzgesagtVideos = await getVideos('kurzgesagt')
-//   const marvelVideos = await getVideos('marvel comics')
-//   const nflVideos = await getVideos('nfl')
-//   const popularVideos = await getPopularVideos()
-//   return {
-//     results: { kurzgesagtVideos, marvelVideos, nflVideos, popularVideos },
-//   }
-// }
-
-// Testing
 async function getData() {
-  const kurzgesagtVideos = getTestVideos('kurzgesagt')
-  const marvelVideos = getTestVideos('marvel')
-  const nflVideos = getTestVideos('nfl')
-  const spaceVideos = getTestVideos('space')
+  let kurzgesagtVideos = null
+  let marvelVideos = null
+  let nflVideos = null
+  let starTrekVideos = null
+  let popularVideos = null
+
+  if (isDev === false) {
+    kurzgesagtVideos = await getVideos('kurzgesagt')
+    marvelVideos = await getVideos('marvel comics')
+    nflVideos = await getVideos('nfl')
+    starTrekVideos = await getVideos('star trek')
+    popularVideos = await getPopularVideos()
+  } else {
+    kurzgesagtVideos = getTestVideos('kurzgesagt')
+    marvelVideos = getTestVideos('marvel')
+    nflVideos = getTestVideos('nfl')
+    starTrekVideos = getTestVideos('space')
+    popularVideos = getTestVideos('popular')
+  }
   return {
     results: {
       kurzgesagtVideos,
       marvelVideos,
       nflVideos,
-      spaceVideos,
+      starTrekVideos,
+      popularVideos,
     },
   }
 }
@@ -66,7 +71,7 @@ export default function Home() {
     marvelVideos,
     nflVideos,
     popularVideos,
-    spaceVideos,
+    starTrekVideos,
   } = videos
 
   return (
@@ -80,20 +85,19 @@ export default function Home() {
       />
       {authenticated && (
         <div className={styles.sectionWrapper}>
-          <CardSection
-            title='Marvel'
-            videos={marvelVideos}
-            // paths={paths}
-            size='large'
-          />
+          <CardSection title='Marvel' videos={marvelVideos} size='large' />
           <CardSection
             title='Kurzgesagt'
             videos={kurzgesagtVideos}
             size='small'
           />
           <CardSection title='NFL' videos={nflVideos} size='small' />
-          <CardSection title='Space' videos={spaceVideos} size='medium' />
-          {/* <CardSection title='Popular' videos={popularVideos} size='medium' /> */}
+          <CardSection
+            title='Star Trek'
+            videos={starTrekVideos}
+            size='medium'
+          />
+          <CardSection title='Popular' videos={popularVideos} size='medium' />
         </div>
       )}
     </main>
