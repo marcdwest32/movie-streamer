@@ -21,7 +21,6 @@ const authOptions = {
       },
       authorize: async (credentials) => {
         const { email, password } = credentials
-        console.log(credentials)
         const username = email.split('@')[0]
         const user = { id: '1', name: username, email }
         return user

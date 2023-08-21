@@ -5,7 +5,6 @@ export const getCommonVideos = async (url) => {
   const response = await fetch(`${baseUrl}${url}&key=${YOUTUBE_API_KEY}`)
 
   const data = await response.json()
-  //   console.log(data)
 
   if (data?.error) {
     console.error('Something went wrong with the video library', data.error)
@@ -13,7 +12,6 @@ export const getCommonVideos = async (url) => {
   }
 
   return data.items.map((item) => {
-    // console.log(item)
     const id = item.id?.videoId || item.id
     return {
       title: item.snippet.title,

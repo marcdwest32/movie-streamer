@@ -24,7 +24,6 @@ const Video = ({ videoId, videoData }) => {
 
   return (
     <div className={styles.container}>
-      {/* video page {videoId} */}
       <Navbar />
       <Modal
         isOpen={true}
