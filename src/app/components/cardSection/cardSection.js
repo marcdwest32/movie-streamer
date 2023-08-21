@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Card from '../card/card'
@@ -36,12 +36,11 @@ const CardSection = ({ size, title, videos }) => {
       </div>
       <div className={styles.cardWrapper} ref={cardWrapperRef}>
         {videos.map((video, i) => {
-          //   console.log(video)
-          const { videoId, channelId } = video
+          const { id } = video
           return (
-            <Link href={`/video/${videoId || channelId}`} key={i}>
-              <Card imgUrl={video.imgUrl} size={size} id={i} key={i} />
-            </Link>
+            <a href={`/video/${id}`} key={id}>
+              <Card imgUrl={video.imgUrl} size={size} id={i} key={id} />
+            </a>
           )
         })}
       </div>

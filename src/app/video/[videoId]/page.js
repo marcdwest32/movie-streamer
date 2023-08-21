@@ -2,29 +2,24 @@
 import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Video from '../../components/video/video'
+import { getVideoById } from '../../lib/videos'
 
-export async function getVideo() {
-  const video = {
-    title: 'this is the title',
-    publishTime: '1990-01-01',
-    description: 'this is the description',
-    channelTitle: 'Picture Company',
-    viewCount: 100000,
-  }
+export async function getVideo(videoId) {
+  const videoArr = await getVideoById(videoId)
 
   return {
-    video,
+    video: videoArr.length > 0 ? videoArr[0] : {},
     revalidate: 10, // in seconds
   }
 }
-const VideoPage = () => {
-  const fullPath = usePathname()
-  const videoId = fullPath.split('video/')[1]
+
+const VideoPage = ({ params }) => {
+  const { videoId } = params
   const [videoData, setVideoData] = useState(null)
 
   useEffect(() => {
     async function fetchVideoData() {
-      const data = await getVideo()
+      const data = await getVideo(videoId)
       setVideoData(data)
     }
 
@@ -35,29 +30,3 @@ const VideoPage = () => {
 }
 
 export default VideoPage
-//   const res = await fetch('https://api.example.com/..., { next: { revalidate: 10 } }')
-//   // The return value is *not* serialized
-//   // You can return Date, Map, Set, etc.
-
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     throw new Error('Failed to fetch data')
-//   }
-
-//   return res.json()
-
-// // export async function generateStaticParams() {
-// //   const listOfVideos = ['uoJwt9l-XhQ', 'V4Z8EdiJxgk', '9FppammO1zk']
-// //   const paths = listOfVideos.map((videoId) => ({
-// //     params: {
-// //       videoId,
-// //     },
-// //   }))
-// //   return { paths, fallback: 'blocking' }
-// // }
-
-// const getPathname = () => {
-//   const fullPath = usePathname()
-//   const videoId = fullPath.split('video/')[1]
-//   return videoId
-// }

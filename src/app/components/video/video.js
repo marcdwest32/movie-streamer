@@ -3,9 +3,12 @@ import React from 'react'
 import Modal from 'react-modal'
 import cls from 'classnames'
 import styles from './video.module.css'
+import { useRouter } from 'next/navigation'
+
 Modal.setAppElement('#__next')
 
 const Video = ({ videoId, videoData }) => {
+  const router = useRouter()
   if (!videoData) {
     return <div>Loading...</div>
   }
