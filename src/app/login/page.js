@@ -42,10 +42,10 @@ const Login = () => {
           <a href='/' className={styles.logoLink}>
             <div className={styles.logoWrapper}>
               <Image
-                src='/static/netflix.svg'
+                src='/static/youTube.png'
                 placeholder='blur'
-                blurDataURL={'/static/netflix.svg'}
-                alt='netflix logo'
+                blurDataURL={'/static/youTube.png'}
+                alt='youtube logo'
                 width={128}
                 height={34}
               />

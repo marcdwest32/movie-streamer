@@ -38,8 +38,8 @@ const Navbar = () => {
         <a href='/' className={styles.logoLink}>
           <div className={styles.logoWrapper}>
             <Image
-              src='/static/netflix.svg'
-              alt='netflix logo'
+              src='/static/youTube.png'
+              alt='youtube logo'
               width={128}
               height={34}
             ></Image>
