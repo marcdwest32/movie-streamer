@@ -6,6 +6,8 @@ import CardSection from './components/cardSection/cardSection'
 import styles from './page.module.css'
 import { getVideos, getTestVideos, getPopularVideos } from './lib/videos'
 import { useSession } from 'next-auth/react'
+import { queryHasuraGQL } from './lib/db/hasura'
+
 const isDev = process.env.DEVELOPMENT
 
 const defaultImg =
@@ -47,8 +49,11 @@ export default function Home() {
   const { data: session } = useSession()
   let authenticated = false
   if (session) {
+    // console.log({ session })
     authenticated = true
   }
+
+  queryHasuraGQL()
 
   const [videos, setVideos] = useState(null)
 
@@ -58,7 +63,6 @@ export default function Home() {
       const data = await getData()
       setVideos(data.results)
     }
-
     fetchData()
   }, [])
 
@@ -78,7 +82,7 @@ export default function Home() {
     <main className={styles.main}>
       <Navbar />
       <Banner
-        title='MeTube'
+        title='YouTube'
         subTitle='projector'
         imgUrl={defaultImg}
         videoId='V4Z8EdiJxgk'

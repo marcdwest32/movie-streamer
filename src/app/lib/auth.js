@@ -20,6 +20,7 @@ const authOptions = {
         },
       },
       authorize: async (credentials) => {
+        console.log(credentials)
         const { email, password } = credentials
         const username = email.split('@')[0]
         const user = { id: '1', name: username, email }
@@ -27,6 +28,31 @@ const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    session: ({ session, token }) => {
+      console.log('Session Callback', { session, token })
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+          randomKey: token.randomKey,
+        },
+      }
+    },
+    jwt: ({ token, user, account }) => {
+      console.log('JWT Callback', { token, user, account })
+      if (user) {
+        const u = user
+        return {
+          ...token,
+          id: u.id,
+          randomKey: u.randomKey,
+        }
+      }
+      return token
+    },
+  },
 }
 
 module.exports = { authOptions }
